@@ -12,10 +12,53 @@ def getInput():
         except ValueError:
             print("Your entry must be an integer!")     # warning if not integer
         else:
+            print("You entered: {}".format(userInput))
             return userInput                            # return input if integer
+
+# function to find smallest power of two
+def powerOfTwo(value):
+    exp = 0                     # initial exponent
+    check = 2**exp              # check-against value
+
+    while check <= value:       # iterate to find smallest power of 2 greater than user input
+        check *= 2              # double check-against value
+        exp += 1                # increase exponent count
+
+    return check, exp           # return check-against value and exponent
+
+# convert decimal user input to binary string
+def convToBin(usrin, check, pwr):
+    zero = '0'                  # bits
+    one = '1'
+
+    binary = ''                 # empty string to hold binary conversion
+
+    while usrin > 0:            # interate until input = 0
+        if usrin < check:       # if input is less than check-against value
+            binary += zero      # add 0 to binary string
+            check /= 2          # reduce check-against value to next smallest power of 2
+        else:                   # if input is greater than check-against value
+            binary += one       # add 1 to binary string
+            usrin -= check      # subtract check-against value from input
+            check /= 2          # reduce check-against value to next smallest power of 2
+
+    binlen = len(binary)        # length of binary string
+
+    # add zeros to end of binary string; string will be too short if rightmost 1
+    # is not in the 1's place
+    n = (pwr + 1) - binlen
+    if n:
+        fill = n * zero         # add appropriate number of zeros
+        binary += fill
+
+    print("Binary representation: {}".format(binary))
+    return binary
 
 # prompt user input
 entry = getInput()
-print("\nYou entered: {}".format(entry))
 
 # determine smallest power of 2 larger than entry
+smallest, power = powerOfTwo(entry)
+
+# convert input to binary string
+binstr = convToBin(entry, smallest, power)
