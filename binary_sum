@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+from __future__ import print_function
+
+# function to get input number from user
+def getInput():
+    while True:
+        val = raw_input("Enter an integer: ")           # prompt input
+
+        try:
+            userInput = int(val)                        # convert input to integer
+        except ValueError:
+            print("Your entry must be an integer!")     # warning if not integer
+        else:
+            return userInput                            # return input if integer
+
+# prompt user input
+entry = getInput()
+print("\nYou entered: {}".format(entry))
+
+# determine smallest power of 2 larger than entry
