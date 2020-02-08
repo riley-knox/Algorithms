@@ -12,7 +12,7 @@ def getInput():
         except ValueError:
             print("Your entry must be an integer!")     # warning if not integer
         else:
-            print("You entered: {}".format(userInput))
+            print("\nYou entered: {}".format(userInput))
             return userInput                            # return input if integer
 
 # function to find smallest power of two
@@ -51,14 +51,26 @@ def convToBin(usrin, check, pwr):
         fill = n * zero         # add appropriate number of zeros
         binary += fill
 
-    print("Binary representation: {}".format(binary))
+    print("\nBinary representation: {}".format(binary))
     return binary
+
+# sum digits in binary string
+def binSum(string):
+    sumstr = 0                          # initialize sum variable
+
+    for i in range(len(string)):        # iterate through entire string
+        if string[i] == '1':            # if string position = 1
+            sumstr += 1                 # add 1 to sum variable
+        elif string[i] == '0':          # do nothing if string position = 0
+            pass
+
+    print("\nSum of digits in binary representation: {}".format(sumstr))
 
 # prompt user input
 entry = getInput()
-
 # determine smallest power of 2 larger than entry
 smallest, power = powerOfTwo(entry)
-
 # convert input to binary string
 binstr = convToBin(entry, smallest, power)
+# get sum of binary string
+binSum(binstr)
